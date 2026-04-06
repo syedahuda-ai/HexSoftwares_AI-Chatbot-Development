@@ -88,13 +88,24 @@ if "messages" not in st.session_state:
     ]
 
 # -------------------- AI RESPONSE FUNCTION --------------------
-def get_ai_response():
-    response = client.chat.completions.create(
-        model="gpt-4.1-mini",
-        messages=st.session_state.messages,
-        temperature=temperature
-    )
-    return response.choices[0].message.content
+def get_ai_response(user_input):
+    user_input = user_input.lower()
+
+    if "hello" in user_input or "hi" in user_input:
+        return "Hello! 👋 How can I help you today?"
+
+    elif "price" in user_input:
+        return "Our pricing depends on your needs. Please specify the product."
+
+    elif "help" in user_input:
+        return "Sure! Tell me your issue 😊"
+
+    elif "bye" in user_input:
+        return "Goodbye! Have a great day!"
+
+    else:
+        return "I'm a demo chatbot 🤖. Try asking about pricing or help!"
+        ai_response = get_ai_response(user_input)
 
 # -------------------- DISPLAY CHAT --------------------
 st.markdown('<div class="chat-container">', unsafe_allow_html=True)
